@@ -6,17 +6,18 @@ class Plant :
         self.y = y
         self.capacity = capacity
         self.refill = refill
-        self.stock = init
+        self.full_bottles = init
+        self.empty_bottles = 0
 
-    def update_stock(self,dt):
-        self.stock += dt*self.refill/24
-        if self.stock > self.capacity :
-            self.stock = self.capacity
+    def update_stock(self,t_dest):#revoir nom variable
+        if self.empty_bottles - t_dest*self.refill/24 > 0:
+            self.full_bottles += t_dest*self.refill/24
+            self.empty_bottles -= t_dest*self.refill/24
+        else :
+            self.full_bottles += self.empty_bottles
+            self.empty_bottles =0
         
-    def give_bottles(self,Truck):
-        self.stock -= (100 - Truck.bouteilles)
-        if self.stock < 0 :
-            self.stock = 0
+
 
 
 
