@@ -1,6 +1,7 @@
-import math
-from main import clients, plants
 import random
+from plant import Plant
+from client import Client
+
 
 class Truck:
     def __init__(self,truck_id,x,y):
@@ -10,7 +11,7 @@ class Truck:
         self.x = x
         self.y = y
         self.destination, self.time_to_destination = None, None
-        self.choose_destination(self)
+        self.new_destination()
 
     def load_at_plant(self):
         # chargement des bouteilles pleines
@@ -37,7 +38,7 @@ class Truck:
             self.full_bottles = 0
         else:
             self.full_bottles = self.destination.full_bottles + self.full_bottles - (self.destination.capacity - 1)
-            self.destination.full_bottles = self.capacity - 1
+            self.destination.full_bottles = self.destination.capacity - 1
         # chargement des bouteilles vides
         if self.empty_bottles + self.destination.empty_bottles <= 80:
             self.empty_bottles += self.destination.empty_bottles
@@ -48,6 +49,7 @@ class Truck:
 
 
     def new_destination(self):
+        from main import clients, plants
         destination = random.choice(clients)
         if self.full_bottles == 0:
             destination = random.choice(plants)

@@ -1,6 +1,6 @@
-from Truck import Truck
-from Plant import Plant
-from Client import Client
+from truck import Truck
+from plant import Plant
+from client import Client
 
 T = 0
 
@@ -26,6 +26,7 @@ with open("plants.csv", "r") as f:
                             int(infos[3]),
                             float(infos[4])
                         ))
+
 trucks = []
 for plant in plants:
     for j in range(5):
@@ -36,7 +37,9 @@ for plant in plants:
                     y=plant.y
                 ))
 while True:
-    dt = min(trucks, key = lambda x : x.time_to_destination)
+    truck_arriving = min(trucks, key = lambda x : x.time_to_destination)
+    dt = truck_arriving.time_to_destination
+    T += dt # pas nécessaire
     # update plants
     for plant in plants:
         plant.update_stock(dt)
@@ -46,10 +49,10 @@ while True:
     # update each truck
     for truck in trucks:
         truck.time_to_destination -= dt
-        # for the truck that has arrived, then update plants/clients
-        if truck.time_to_destination == 0:
-            if type(truck.destination) == Plant:
-                truck.load_at_plant()
-            elif type(truck.destination) == Client:
-                truck.unload_at_client()
-            truck.choose_destination()
+
+    # for the truck that has arrived, then update plants/clients
+    if type(truck_arriving.destination) == Plant:
+        truck_arriving.load_at_plant()
+    elif type(truck_arriving.destination) == Client:
+        truck_arriving.unload_at_client()
+    truck_arriving.new_destination()

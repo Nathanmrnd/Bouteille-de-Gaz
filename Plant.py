@@ -1,5 +1,3 @@
-from Truck import Truck
-
 class Plant :
     def __init__(self,x,y,capacity,init,refill):
         self.x = x

@@ -1,7 +1,7 @@
 import pygame
-from Plant import Plant
-from Truck import Truck
-from Client import Client
+from plant import Plant
+from truck import Truck
+from client import Client
 
 class Board:
     def __init__(self,screen):
