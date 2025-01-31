@@ -1,8 +1,8 @@
 class Client:
     """ Représente un client consommant des bouteilles de gaz. """
-    def __init__(self, coord_x, coord_y, capacity, init, consumption):
-        self.x = coord_x
-        self.y = coord_y
+    def __init__(self, x, y, capacity, init, consumption):
+        self.x = x
+        self.y = y
         self.capacity = capacity
         self.full_bottles = 0  # Bouteilles pleines stockées
         self.empty_bottles = init  # Bouteilles vides accumulées

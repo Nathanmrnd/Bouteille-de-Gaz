@@ -12,22 +12,22 @@ with open("clients.csv", "r") as f:
     lines = f.readlines()[1:]
     for line in lines:
         infos = line.split(",")
-        clients.append(Client(float(infos[0]),
-                            float(infos[1]),
-                            int(infos[2]),
-                            int(infos[3]),
-                            float(infos[4])
+        clients.append(Client(x=float(infos[0]),
+                            y=float(infos[1]),
+                            capacity=int(infos[2]),
+                            init=int(infos[3]),
+                            consumption=float(infos[4])
                         ))
 plants = []
 with open("plants.csv", "r") as f:
     lines = f.readlines()[1:]
     for line in lines:
         infos = line.split(",")
-        plants.append(Plant(float(infos[0]),
-                            float(infos[1]),
-                            int(infos[2]),
-                            int(infos[3]),
-                            float(infos[4])
+        plants.append(Plant(y=float(infos[0]),
+                            x=float(infos[1]),
+                            capacity=int(infos[2]),
+                            init=int(infos[3]),
+                            refill=float(infos[4])
                         ))
 
 trucks = []
@@ -58,14 +58,18 @@ while True:
         client.update_stock(dt)
     # update each truck
     for truck in trucks:
-        truck.time_to_destination -= dt
+        print(truck.destination, truck.time_to_destination)
+        if truck.time_to_destination > 0:
+            truck.update(dt)
+        else:
+             # for the truck that has arrived, then update plants/clients
+            if type(truck_arriving.destination) == Plant:
+                truck_arriving.load_at_plant()
+            elif type(truck_arriving.destination) == Client:
+                truck_arriving.unload_at_client()
+            truck_arriving.new_destination()
 
-    # for the truck that has arrived, then update plants/clients
-    if type(truck_arriving.destination) == Plant:
-        truck_arriving.load_at_plant()
-    elif type(truck_arriving.destination) == Client:
-        truck_arriving.unload_at_client()
-    truck_arriving.new_destination()
+    
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT :
@@ -75,6 +79,5 @@ while True:
                     break
 
     print("Hello")
-    time.sleep(1)
     b.draw_t(trucks)
     pygame.display.update()

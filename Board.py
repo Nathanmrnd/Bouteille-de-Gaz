@@ -16,17 +16,16 @@ class Board:
         self.screen = screen
 
     def draw_plant(self,plant : Plant):
-        rect = pygame.Rect(transform_x(plant.x), transform_y(plant.y), 10, 10)
+        rect = pygame.Rect(transform_x(plant.x), transform_y(plant.y), 20, 20)
         pygame.draw.rect(self.screen, (255,0,0) , rect)
 
     def draw_truck(self,truck: Truck):
-        rect = pygame.Rect(transform_x(truck.x), transform_y(truck.y), 2, 2)
+        rect = pygame.Rect(transform_x(truck.x), transform_y(truck.y), 5, 5)
         pygame.draw.rect(self.screen, (0,255,0) , rect)
 
     def draw_client(self,client: Client):
         rect = pygame.Rect(transform_x(client.x), transform_y(client.y), 5, 5)
         pygame.draw.rect(self.screen, (0,0,255) , rect)
-
 
     def draw_game(self,plants,clients,trucks):
         self.screen.fill(self.color)
@@ -37,8 +36,6 @@ class Board:
         for truck in trucks:
             self.draw_truck(truck)
 
-
     def draw_t(self,trucks):
         for truck in trucks:
             self.draw_truck(truck)
-

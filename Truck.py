@@ -14,6 +14,7 @@ class Truck:
         self.new_destination()
 
     def load_at_plant(self):
+        self.x, self.y = self.destination.x, self.destination.y
         # chargement des bouteilles pleines
         if self.full_bottles + self.destination.full_bottles <= 80:
             self.full_bottles += self.destination.full_bottles
@@ -32,6 +33,7 @@ class Truck:
         # Rq : les deux if ne peuvent pas être faux car sinon le camion ou l'usine déborderait déjà
         
     def unload_at_client(self):
+        self.x, self.y = self.destination.x, self.destination.y
         # déchargement des bouteilles pleines
         if self.full_bottles + self.destination.full_bottles <= self.destination.capacity - 1:
             self.destination.full_bottles += self.full_bottles
@@ -58,3 +60,8 @@ class Truck:
             return ((self.x-destination.x)**2 + (self.y-destination.y)**2)**0.5
         self.destination = destination
         self.time_to_destination = distance(self, destination)/50
+
+    def update(self, dt):
+        x = (self.destination.x-self.x)*dt/self.time_to_destination
+        y = (self.destination.y-self.y)*dt/self.time_to_destination
+        self.time_to_destination -= dt
