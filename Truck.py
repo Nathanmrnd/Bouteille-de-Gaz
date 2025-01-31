@@ -1,20 +1,24 @@
 import math
 class Truck:
-    def __init__(self,truck_id,bouteilles,x,y):
+    def __init__(self,truck_id,bouteilles,x,y,destination,typedestination):
         self.truck_id=truck_id
         self.bouteilles=bouteilles
         self.x=x
         self.y=y
+        self.destination=destination
+        self.typedestination=typedestination
 
     def choisir_client_proche(self, clients):
         def distance(client):
             return math.sqrt((self.x - client.x) ** 2 + (self.y - client.y) ** 2)
-        self.client_cible = min(clients, key=distance)
+        self.destination = min(clients, key=distance)
+        self.typedestination = 'client'
         
     def choisir_usine_proche(self,plants):
         def distance(plant):
             return math.sqrt((self.x - plant.x) ** 2 + (self.y - plant.y) ** 2)
-        self.plant_cible = min(plants, key=distance)
+        self.destination = min(plants, key=distance)
+        self.typedestination = 'plant'
 
     def load(self, quantity):
         """ Charge des bouteilles dans le camion. """
@@ -30,5 +34,16 @@ class Truck:
         else:
             self.stock = 0
 
+    def refill(self,destination):
+        if self.destination.stock >= 100-self.bouteilles:
+            self.bouteilles = 100
+            self.destination.stock -= 100-self.bouteilles
+        else:
+            self.bouteilles += self.destination.stock
+            self.destination.stock = 0
+
+    def empty(self,destination):
+        if self.bouteilles >= (destination.capacity-destination.stock_full):
+            self.bouteilles -= (destination.capacity-destination.stock_full)
 
 
