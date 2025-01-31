@@ -1,4 +1,4 @@
-
+from .camions import Camion
 
 class Plant :
     def __init__(self,x,y,capacity,init,refill):
@@ -13,5 +13,7 @@ class Plant :
         if self.stock > self.capacity :
             self.stock = self.capacity
         
-    def fill_camion(self,Camion):
-        self.
+    def give_bottle(self,Camion):
+        self.stock -= (100 - Camion.bouteilles)
+
+
