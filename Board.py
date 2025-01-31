@@ -5,7 +5,7 @@ from client import Client
 
 xmin, xmax = -500, 1000
 ymin, ymax = 4300, 5000
-width, height = 1000, 1000
+width, height = 1000, 750
 def transform_x(x):
     return (x-xmin)/(xmax-xmin)*width
 def transform_y(y):
