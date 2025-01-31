@@ -41,7 +41,7 @@ for plant in plants:
                 ))
 
 pygame.init()
-screen = pygame.display.set_mode((1000, 1000))
+screen = pygame.display.set_mode((1000, 750))
 b = Board(screen)
 b.draw_game(plants, clients, trucks)
 pygame.display.update()
@@ -69,10 +69,10 @@ while True:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT :
-                break
+            exit()
         if event.type == pygame.KEYDOWN :
                 if event.key == pygame.K_q:
-                    break
+                    exit()
 
     print("Hello")
     time.sleep(1)
