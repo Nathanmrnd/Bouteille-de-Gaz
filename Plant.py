@@ -1,4 +1,4 @@
-from .camions import Camion
+from .Camions import Camion
 
 class Plant :
     def __init__(self,x,y,capacity,init,refill):
@@ -16,4 +16,8 @@ class Plant :
     def give_bottle(self,Camion):
         self.stock -= (100 - Camion.bouteilles)
 
+    def draw_plant(self):
+        rect = pygame.Rect(self.x, self.y, 10, 10)
 
+
+    

@@ -18,6 +18,7 @@ class Camion:
 
 
 
+
 camions = []
 for usine in usines:
     for j in range(5):
