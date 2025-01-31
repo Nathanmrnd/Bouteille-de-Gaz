@@ -14,12 +14,3 @@ class Plant :
         else :
             self.full_bottles += self.empty_bottles
             self.empty_bottles =0
-        
-
-
-
-
-        
-
-
-    

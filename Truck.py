@@ -62,6 +62,6 @@ class Truck:
         self.time_to_destination = distance(self, destination)/50
 
     def update(self, dt):
-        x = (self.destination.x-self.x)*dt/self.time_to_destination
-        y = (self.destination.y-self.y)*dt/self.time_to_destination
+        self.x += (self.destination.x-self.x)*dt/self.time_to_destination
+        self.y += (self.destination.y-self.y)*dt/self.time_to_destination
         self.time_to_destination -= dt
