@@ -52,14 +52,32 @@ class Truck:
 
     def new_destination(self):
         from main import clients, plants
-        destination = random.choice(clients)
+
+        def distance(destination):
+            """ Calcule la distance euclidienne entre le camion et une destination """
+            return ((self.x - destination.x) ** 2 + (self.y - destination.y) ** 2) ** 0.5
+
         if self.full_bottles == 0:
-            destination = random.choice(plants)
-        # renvoyer destination et temps de trajet jusqu'à destination
-        def distance(self, destination):
-            return ((self.x-destination.x)**2 + (self.y-destination.y)**2)**0.5
-        self.destination = destination
-        self.time_to_destination = distance(self, destination)/50
+            # 🔹 Aller à l'usine la plus proche qui a du stock
+            available_plants = [p for p in plants if p.full_bottles > 0]
+            if available_plants:
+                self.destination = min(available_plants, key=distance)
+            else:
+                self.destination = None  # Aucun choix possible, le camion reste bloqué
+        else:
+            # 🔹 Aller au client qui a le plus besoin de bouteilles, en minimisant la distance
+            needy_clients = [c for c in clients if c.full_bottles < c.capacity - 1]
+            if needy_clients:
+                self.destination = min(needy_clients, key=lambda c: distance(c) / (c.capacity - c.full_bottles + 1))
+            else:
+                self.destination = None  # Aucun client valide, le camion reste bloqué
+
+        # Calcul du temps nécessaire pour atteindre la nouvelle destination
+        if self.destination:
+            self.time_to_destination = distance(self.destination) / 50  # Vitesse supposée de 50 km/h
+        else:
+            self.time_to_destination = float('inf')  # Camion bloqué
+
 
     def update(self, dt):
         self.x += (self.destination.x-self.x)*dt/self.time_to_destination
