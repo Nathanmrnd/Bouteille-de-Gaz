@@ -1,7 +1,10 @@
 import random
 from plant import Plant
 from client import Client
+profit = 0
 
+def renvoyer_profit():
+    return profit
 
 class Truck:
     def __init__(self,truck_id,x,y):
@@ -14,13 +17,16 @@ class Truck:
         self.new_destination()
 
     def load_at_plant(self):
+        global profit
         self.x, self.y = self.destination.x, self.destination.y
         # chargement des bouteilles pleines
         if self.full_bottles + self.destination.full_bottles <= 80:
+            profit-=40*self.destination.full_bottles
             self.full_bottles += self.destination.full_bottles
             self.destination.full_bottles = 0
         else:
             self.destination.full_bottles = self.destination.full_bottles + self.full_bottles - 80
+            profit+=(self.full_bottles-80)*40
             self.full_bottles = 80
         # déchargement des bouteilles vides
         if self.empty_bottles + self.destination.empty_bottles <= self.destination.capacity - 1: # pour la bouteille en cours de remplissage
@@ -33,13 +39,16 @@ class Truck:
         # Rq : les deux if ne peuvent pas être faux car sinon le camion ou l'usine déborderait déjà
         
     def unload_at_client(self):
+        global profit
         self.x, self.y = self.destination.x, self.destination.y
         # déchargement des bouteilles pleines
         if self.full_bottles + self.destination.full_bottles <= self.destination.capacity - 1:
             self.destination.full_bottles += self.full_bottles
+            profit+=self.full_bottles*100
             self.full_bottles = 0
         else:
             self.full_bottles = self.destination.full_bottles + self.full_bottles - (self.destination.capacity - 1)
+            profit+=(self.destination.capacity-1-self.destination.full_bottles)*100
             self.destination.full_bottles = self.destination.capacity - 1
         # chargement des bouteilles vides
         if self.empty_bottles + self.destination.empty_bottles <= 80:
@@ -51,6 +60,7 @@ class Truck:
 
 
     def new_destination(self):
+        global profit
         from main import clients, plants
 
         def distance(destination):
@@ -68,6 +78,7 @@ class Truck:
 
         # Calcul du temps nécessaire pour atteindre la nouvelle destination
         self.time_to_destination = distance(self.destination) / 50  # Vitesse supposée de 50 km/h
+        profit-=distance(self.destination)*0.1
 
 
     def update(self, dt):

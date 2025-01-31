@@ -3,6 +3,7 @@ from plant import Plant
 from truck import Truck
 from client import Client
 
+
 xmin, xmax = -500, 1000
 ymin, ymax = 4300, 5000
 width, height = 1000, 750
@@ -25,7 +26,7 @@ class Board:
 
     def draw_client(self,client: Client, ratio):
         rect = pygame.Rect(transform_x(client.x), transform_y(client.y), 5, 5)
-        print(ratio)
+        # print(ratio)
         pygame.draw.rect(self.screen, (0, 0, 255, 255*ratio) , rect)
 
     def draw_game(self,plants,clients,trucks):
@@ -36,3 +37,5 @@ class Board:
             self.draw_client(client, client.full_bottles/client.capacity)
         for truck in trucks:
             self.draw_truck(truck, truck.full_bottles/80)
+
+        
