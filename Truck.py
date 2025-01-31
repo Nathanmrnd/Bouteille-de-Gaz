@@ -1,13 +1,7 @@
 import math
-<<<<<<< HEAD:Truck.py
 class Truck:
     def __init__(self,truck_id,bouteilles,x,y):
         self.truck_id=truck_id
-=======
-class Camion:
-    def __init__(self,camion_id,bouteilles,x,y):
-        self.camion_id=camion_id
->>>>>>> a59bd6957ed4ff9ea5a6bae40e615ea04d2042f0:camions.py
         self.bouteilles=bouteilles
         self.x=x
         self.y=y
