@@ -3,6 +3,7 @@ from plant import Plant
 from client import Client
 from board import Board
 import pygame
+import time
 
 T = 0
 
@@ -40,8 +41,10 @@ for plant in plants:
                 ))
 
 pygame.init()
-screen = pygame.display.set_mode((1000, 1000))
+screen = pygame.display.set_mode((1000, 500))
 b = Board(screen)
+b.draw_game(plants, clients, trucks)
+pygame.display.update()
 
 while True:
     truck_arriving = min(trucks, key = lambda x : x.time_to_destination)
@@ -63,5 +66,20 @@ while True:
     elif type(truck_arriving.destination) == Client:
         truck_arriving.unload_at_client()
     truck_arriving.new_destination()
+
+
+
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT :
+                break
+        if event.type == pygame.KEYDOWN :
+                if event.key == pygame.K_q:
+                    break
+
+
+
     print("Hello")
-    b.draw_game(plants, clients, trucks)
+    time.sleep(10)
+    b.draw_t(trucks)
+    pygame.display.update()

@@ -11,26 +11,34 @@ class Board:
 
     def draw_plant(self,plant : Plant):
         rect = pygame.Rect(plant.x, plant.y-yoffset, 10, 10)
-        pygame.draw.rect(self.screen, (0,0,0) , rect)
+        pygame.draw.rect(self.screen, (255,0,0) , rect)
 
     def draw_truck(self,truck: Truck):
         rect = pygame.Rect(truck.x, truck.y-yoffset, 2, 2)
-        pygame.draw.rect(self.screen, (255,0,0) , rect)
+        pygame.draw.rect(self.screen, (0,255,0) , rect)
 
     def draw_client(self,client: Client):
         rect = pygame.Rect(client.x, client.y-yoffset, 5, 5)
-        pygame.draw.rect(self.screen, (255,0,0) , rect)
+        pygame.draw.rect(self.screen, (0,0,255) , rect)
 
 
     def draw_game(self,plants,clients,trucks):
         self.screen.fill(self.color)
         for plant in plants:    
             self.draw_plant(plant)
+            pygame.display.update()
         for client in clients:
             self.draw_client(client)
+            pygame.display.update()
 #peut-être réflechir à ne pas redessiner les usines/clients à chaque fois
+        for truck in trucks:
+            self.draw_truck(truck)
+            pygame.display.update()
+
+        pygame.display.update()
+
+    def draw_t(self,trucks):
         for truck in trucks:
             self.draw_truck(truck)
 
         pygame.display.update()
-
