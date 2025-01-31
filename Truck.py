@@ -35,9 +35,9 @@ class Truck:
             self.stock = 0
 
     def refill(self,destination):
-        if self.destination.stock >= 100-self.bouteilles:
-            self.bouteilles = 100
-            self.destination.stock -= 100-self.bouteilles
+        if self.destination.stock >= 80-self.bouteilles:
+            self.bouteilles = 80
+            self.destination.stock -= 80-self.bouteilles
         else:
             self.bouteilles += self.destination.stock
             self.destination.stock = 0
@@ -45,5 +45,8 @@ class Truck:
     def empty(self,destination):
         if self.bouteilles >= (destination.capacity-destination.stock_full):
             self.bouteilles -= (destination.capacity-destination.stock_full)
-
+            destination.stock = destination.capacity
+        else:
+            destination.stock = self.bouteilles+destination.stock_full
+            self.bouteilles = 0
 
