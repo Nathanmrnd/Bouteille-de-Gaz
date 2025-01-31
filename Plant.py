@@ -1,4 +1,4 @@
-from .camions import Camion
+from Truck import Truck
 
 class Plant :
     def __init__(self,x,y,capacity,init,refill):
@@ -8,8 +8,8 @@ class Plant :
         self.refill = refill
         self.stock = init
 
-    def update_stock(self,t):
-        self.stock += t*self.refill/24
+    def update_stock(self,dt):
+        self.stock += dt*self.refill/24
         if self.stock > self.capacity :
             self.stock = self.capacity
         
