@@ -10,12 +10,14 @@ class Truck:
 
 
     def load_at_plant(self):
+        pass
         # if self.destination.stock >= 100-self.bouteilles:
         #     self.bouteilles = 100
         #     self.destination.stock -= 100-self.bouteilles
 
 
     def unload_at_client(self,destination):
+        pass
         # if self.bouteilles >= (destination.capacity-destination.stock_full):
         #     self.bouteilles -= (destination.capacity-destination.stock_full)
         #     destination.stock = destination.capacity

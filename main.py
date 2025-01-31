@@ -19,12 +19,12 @@ for plant in plants:
     for j in range(5):
         if len(trucks)<100:
             trucks.append(Truck(
-                    id_truck=len(trucks) + 1,  # ID unique pour chaque camion
+                    truck_id=len(trucks) + 1,  # ID unique pour chaque camion
                     x=plant.x,
                     y=plant.y,
-                    bouteilles=100
-                ))
+                    1))
 while True:
     T+=t # à termes, calculer le premier instant où un camion arrive
+    print(t)
     # update each truck
     # see if trucks have arrived, then update plants/clients
