@@ -12,7 +12,6 @@ class Truck:
         self.destination, self.time_to_destination = None, None
         self.choose_destination(self)
 
-
     def load_at_plant(self):
         # chargement des bouteilles pleines
         if self.full_bottles + self.destination.full_bottles <= 80:
@@ -46,7 +45,6 @@ class Truck:
         else:
             self.destination.empty_bottles = self.empty_bottles + self.destination.empty_bottles - 80
             self.empty_bottles = 80
-        self.choose_destination(self)
 
 
     def new_destination(self):

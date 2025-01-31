@@ -3,7 +3,7 @@ from Plant import Plant
 from Client import Client
 
 T = 0
-t = 0.1 # en heures
+
 clients = []
 with open("clients.csv", "r") as f:
     lines = f.readlines()[1:]
@@ -37,6 +37,20 @@ for plant in plants:
                     bouteilles=100
                 ))
 while True:
-    T+=t # à termes, calculer le premier instant où un camion arrive
+    dt = min(trucks, key = lambda x : x.time_to_destination)
+    # update plants
+    for plant in plants:
+        plant.update_stock(dt)
+    # update clients
+    for client in clients:
+        client.update_stock(dt)
     # update each truck
-    # see if trucks have arrived, then update plants/clients
+    for truck in trucks:
+        truck.time_to_destination -= dt
+        # for the truck that has arrived, then update plants/clients
+        if truck.time_to_destination == 0:
+            if type(truck.destination) == Plant:
+                truck.load_at_plant()
+            elif type(truck.destination) == Client:
+                truck.unload_at_client()
+            truck.choose_destination()
