@@ -13,8 +13,11 @@ class Plant :
         if self.stock > self.capacity :
             self.stock = self.capacity
         
-    def give_bottle(self,Camion):
-        self.stock -= (100 - Camion.bouteilles)
+    def give_bottles(self,Truck):
+        self.stock -= (100 - Truck.bouteilles)
+        if self.stock < 0 :
+            self.stock = 0
+
 
     def draw_plant(self):
         rect = pygame.Rect(self.x, self.y, 10, 10)
