@@ -1,31 +1,32 @@
 import math
-class Camions:
-    def __init__(self,camion_id,bouteilles,x,y):
+class Camion:
+    def __init__(self,camion_id,bouteilles,x,y,destination,typedestination):
         self.camion_id=camion_id
         self.bouteilles=bouteilles
         self.x=x
         self.y=y
+        self.destination=destination
+        self.typedestination=typedestination
 
     def choisir_client_proche(self, clients):
         def distance(client):
             return math.sqrt((self.x - client.x) ** 2 + (self.y - client.y) ** 2)
-        self.client_cible = min(clients, key=distance)
+        self.destination = min(clients, key=distance)
+        self.typedestination = 'client'
         
     def choisir_usine_proche(self,plants):
         def distance(plant):
             return math.sqrt((self.x - plant.x) ** 2 + (self.y - plant.y) ** 2)
-        self.plant_cible = min(plants, key=distance)
+        self.destination = min(plants, key=distance)
+        self.typedestination = 'plant'
+
+    def refill_truck(self):
+        if self.destination.stock >= (100-self.bouteilles):
+            self.bouteilles = 100
+            self.destination.stock -= self.stock
+        else:
+            self.bouteilles += self.destination.stock
+            self.destination.stock = 0
 
 
 
-camions = []
-for usine in usines:
-    for j in range(5):
-        camions.append(
-            Camion(
-                id_camion=len(camions) + 1,  # ID unique pour chaque camion
-                x=usine.x,
-                y=usine.y
-                bouteilles=100  # Nombre aléatoire de bouteilles
-            )
-        )
