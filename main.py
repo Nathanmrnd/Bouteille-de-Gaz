@@ -1,8 +1,20 @@
 from Truck import Truck
 from Plant import Plant
+from Client import Client
 
 T = 0
 t = 0.1 # en heures
+clients = []
+with open("clients.csv", "r") as f:
+    lines = f.readlines()[1:]
+    for line in lines:
+        infos = line.split(",")
+        clients.append(Client(float(infos[0]),
+                            float(infos[1]),
+                            int(infos[2]),
+                            int(infos[3]),
+                            float(infos[4])
+                        ))
 plants = []
 with open("plants.csv", "r") as f:
     lines = f.readlines()[1:]

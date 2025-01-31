@@ -1,4 +1,7 @@
 import math
+from main import clients, plants
+import random
+
 class Truck:
     def __init__(self,truck_id,x,y,destination,destination_type):
         self.truck_id = truck_id
@@ -47,6 +50,10 @@ class Truck:
 
 
     def new_destination(self):
-        destination = usine[0]
+        destination = random.choice(clients)
+        if self.full_bottles == 0:
+            destination = random.choice(plants)
         # renvoyer destination et temps de trajet jusqu'à destination
-        return (destination, 10)
+        def distance(self, destination):
+            return ((self.x-destination.x)**2 + (self.y-destination.y)**2)**0.5
+        return (destination, distance(self, destination)/50)
