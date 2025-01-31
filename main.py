@@ -4,6 +4,7 @@ from client import Client
 from board import Board
 import pygame
 import time
+import random
 
 T = 0
 
@@ -32,13 +33,13 @@ with open("plants.csv", "r") as f:
 
 trucks = []
 for plant in plants:
-    for j in range(5):
-        if len(trucks)<100:
-            trucks.append(Truck(
-                    truck_id=len(trucks) + 1,  # ID unique pour chaque camion
-                    x=plant.x,
-                    y=plant.y
-                ))
+    while len(trucks)<100:
+        random_client = random.choice(clients)
+        trucks.append(Truck(
+                truck_id=len(trucks) + 1,  # ID unique pour chaque camion
+                x=random_client.x,
+                y=random_client.y
+            ))
 
 pygame.init()
 screen = pygame.display.set_mode((1000, 750))
