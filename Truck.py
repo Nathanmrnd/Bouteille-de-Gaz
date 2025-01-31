@@ -10,31 +10,40 @@ class Truck:
 
 
     def load_at_plant(self):
+        # chargement des bouteilles pleines
         if self.full_bottles + self.destination.full_bottles <= 80:
             self.full_bottles += self.destination.full_bottles
             self.destination.full_bottles = 0
         else:
             self.destination.full_bottles = self.destination.full_bottles + self.full_bottles - 80
             self.full_bottles = 80
-
+        # déchargement des bouteilles vides
         if self.empty_bottles + self.destination.empty_bottles <= self.destination.capacity - 1: # pour la bouteille en cours de remplissage
             self.destination.empty_bottles += self.empty_bottles
             self.empty_bottles = 0
         else:
-            self.empty_bottles = self.destination.empty_bottles + self.empty_bottles - (self.capacity - 1)
+            self.empty_bottles = self.destination.empty_bottles + self.empty_bottles - (self.destination.capacity - 1)
             self.destination.empty_bottles = self.destination.capacity - 1
 
         # Rq : les deux if ne peuvent pas être faux car sinon le camion ou l'usine déborderait déjà
         
 
 
-    def unload_at_client(self,destination):
-        if self.bouteilles >= (destination.capacity-destination.stock_full):
-            self.bouteilles -= (destination.capacity-destination.stock_full)
-            destination.stock = destination.capacity
+    def unload_at_client(self):
+        # déchargement des bouteilles pleines
+        if self.full_bottles + self.destination.full_bottles <= self.destination.capacity - 1:
+            self.destination.full_bottles += self.full_bottles
+            self.full_bottles = 0
         else:
-            destination.stock = self.bouteilles+destination.stock_full
-            self.bouteilles = 0
+            self.full_bottles = self.destination.full_bottles + self.full_bottles - (self.destination.capacity - 1)
+            self.destination.full_bottles = self.capacity - 1
+        # chargement des bouteilles vides
+        if self.empty_bottles + self.destination.empty_bottles <= 80:
+            self.empty_bottles += self.destination.empty_bottles
+            self.destination.empty_bottles = 0
+        else:
+            self.destination.empty_bottles = self.empty_bottles + self.destination.empty_bottles - 80
+            self.empty_bottles = 80
 
 
     def new_destination(self):
