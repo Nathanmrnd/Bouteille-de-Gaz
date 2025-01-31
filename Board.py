@@ -35,7 +35,3 @@ class Board:
             self.draw_client(client)
         for truck in trucks:
             self.draw_truck(truck)
-
-    def draw_t(self,trucks):
-        for truck in trucks:
-            self.draw_truck(truck)

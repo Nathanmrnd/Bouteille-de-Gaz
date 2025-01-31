@@ -1,7 +1,7 @@
 class Plant :
     def __init__(self,x,y,capacity,init,refill):
-        self.x = y
-        self.y = x
+        self.x = x
+        self.y = y
         self.capacity = capacity
         self.refill = refill
         self.full_bottles = init

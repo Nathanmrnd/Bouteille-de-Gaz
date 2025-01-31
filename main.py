@@ -49,7 +49,7 @@ pygame.display.update()
 while True:
     truck_arriving = min(trucks, key = lambda x : x.time_to_destination)
     dt = truck_arriving.time_to_destination
-    T += dt # pas nécessaire
+
     # update plants
     for plant in plants:
         plant.update_stock(dt)
@@ -58,7 +58,6 @@ while True:
         client.update_stock(dt)
     # update each truck
     for truck in trucks:
-        print(truck.destination, truck.time_to_destination)
         if truck.time_to_destination > 0:
             truck.update(dt)
         else:
@@ -69,8 +68,6 @@ while True:
                 truck_arriving.unload_at_client()
             truck_arriving.new_destination()
 
-    
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT :
             exit()
@@ -78,6 +75,6 @@ while True:
                 if event.key == pygame.K_q:
                     exit()
 
-    print("Hello")
-    b.draw_t(trucks)
+    time.sleep(dt) # dt en h mais bonne valeur en s pour pause
+    b.draw_game(plants, clients, trucks)
     pygame.display.update()
