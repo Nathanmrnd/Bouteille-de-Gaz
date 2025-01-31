@@ -1,6 +1,10 @@
 import math
 class Camion:
+<<<<<<< HEAD
     def __init__(self,camion_id,bouteilles,x,y,destination,typedestination):
+=======
+    def __init__(self,camion_id,bouteilles,x,y):
+>>>>>>> a59bd6957ed4ff9ea5a6bae40e615ea04d2042f0
         self.camion_id=camion_id
         self.bouteilles=bouteilles
         self.x=x
@@ -27,6 +31,20 @@ class Camion:
         else:
             self.bouteilles += self.destination.stock
             self.destination.stock = 0
+
+    def load(self, quantity):
+        """ Charge des bouteilles dans le camion. """
+        if self.stock + quantity <= self.MAX_CAPACITY:
+            self.stock += quantity
+        else:
+            self.stock = self.MAX_CAPACITY  # Chargement maximal
+
+    def unload(self, quantity):
+        """ Décharge des bouteilles du camion. """
+        if self.stock - quantity >= 0:
+            self.stock -= quantity
+        else:
+            self.stock = 0
 
 
 
