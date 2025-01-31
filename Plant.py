@@ -19,8 +19,8 @@ class Plant :
             self.stock = 0
 
 
-    def draw_plant(self):
-        rect = pygame.Rect(self.x, self.y, 10, 10)
+
+        
 
 
     

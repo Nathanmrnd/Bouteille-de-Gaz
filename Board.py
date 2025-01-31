@@ -1,7 +1,7 @@
 import pygame
-from .Plant import Plant
-from .Truck import Truck
-from .Client import Client
+from Plant import Plant
+from Truck import Truck
+from Client import Client
 
 class Board:
     def __init__(self,screen):
@@ -13,11 +13,11 @@ class Board:
         pygame.draw.rect(self.screen, (0,0,0) , rect)
 
     def draw_truck(self,truck: Truck):
-        rect = pygame.Rect(truck.x, truck.y, 10, 10)
+        rect = pygame.Rect(truck.x, truck.y, 2, 2)
         pygame.draw.rect(self.screen, (255,0,0) , rect)
 
     def draw_client(self,client: Client):
-        rect = pygame.Rect(client.coord_x, client.coord_x, 10, 10)
+        rect = pygame.Rect(client.coord_x, client.coord_x, 5, 5)
         pygame.draw.rect(self.screen, (255,0,0) , rect)
 
 
