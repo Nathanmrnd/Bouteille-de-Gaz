@@ -3,7 +3,7 @@ from main import clients, plants
 import random
 
 class Truck:
-    def __init__(self,truck_id,x,y,destination,destination_type):
+    def __init__(self,truck_id,x,y):
         self.truck_id = truck_id
         self.full_bottles = 0
         self.empty_bottles = 0

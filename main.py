@@ -33,8 +33,7 @@ for plant in plants:
             trucks.append(Truck(
                     truck_id=len(trucks) + 1,  # ID unique pour chaque camion
                     x=plant.x,
-                    y=plant.y,
-                    bouteilles=100
+                    y=plant.y
                 ))
 while True:
     dt = min(trucks, key = lambda x : x.time_to_destination)
