@@ -1,5 +1,5 @@
 import math
-class Camions:
+class Camion:
     def __init__(self,camion_id,bouteilles,x,y):
         self.camion_id=camion_id
         self.bouteilles=bouteilles
