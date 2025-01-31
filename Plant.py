@@ -1,5 +1,3 @@
-
-
 class Plant :
     def __init__(self,x,y,capacity,init,refill):
         self.x = x
@@ -8,10 +6,10 @@ class Plant :
         self.refill = refill
         self.stock = init
 
-    def update_stock(self,t):
-        self.stock += t*self.refill/24
+    def update_stock(self,dt):
+        self.stock += dt*self.refill/24
         if self.stock > self.capacity :
             self.stock = self.capacity
         
-    def fill_camion(self,Camion):
-        self.
+    # def fill_camion(self,Camion):
+    #     self.

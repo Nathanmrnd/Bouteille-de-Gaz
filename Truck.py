@@ -1,7 +1,7 @@
 import math
-class Camions:
-    def __init__(self,camion_id,bouteilles,x,y):
-        self.camion_id=camion_id
+class Truck:
+    def __init__(self,truck_id,bouteilles,x,y):
+        self.truck_id=truck_id
         self.bouteilles=bouteilles
         self.x=x
         self.y=y
@@ -18,14 +18,3 @@ class Camions:
 
 
 
-camions = []
-for usine in usines:
-    for j in range(5):
-        camions.append(
-            Camion(
-                id_camion=len(camions) + 1,  # ID unique pour chaque camion
-                x=usine.x,
-                y=usine.y
-                bouteilles=100  # Nombre aléatoire de bouteilles
-            )
-        )
