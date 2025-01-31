@@ -16,6 +16,20 @@ class Camion:
             return math.sqrt((self.x - plant.x) ** 2 + (self.y - plant.y) ** 2)
         self.plant_cible = min(plants, key=distance)
 
+    def load(self, quantity):
+        """ Charge des bouteilles dans le camion. """
+        if self.stock + quantity <= self.MAX_CAPACITY:
+            self.stock += quantity
+        else:
+            self.stock = self.MAX_CAPACITY  # Chargement maximal
+
+    def unload(self, quantity):
+        """ Décharge des bouteilles du camion. """
+        if self.stock - quantity >= 0:
+            self.stock -= quantity
+        else:
+            self.stock = 0
+
 
 
 camions = []
