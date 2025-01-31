@@ -31,7 +31,7 @@ for plant in plants:
     for j in range(5):
         if len(trucks)<100:
             trucks.append(Truck(
-                    id_truck=len(trucks) + 1,  # ID unique pour chaque camion
+                    truck_id=len(trucks) + 1,  # ID unique pour chaque camion
                     x=plant.x,
                     y=plant.y,
                     bouteilles=100
